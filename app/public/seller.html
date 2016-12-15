@@ -1,0 +1,111 @@
+<!-- author : siraj ghaffar -->
+<!DOCTYPE html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="hackathonCars">
+<head>
+    <!-- META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+    <title>Hackathon Cars App</title>
+    <link rel="stylesheet" href="car.css">
+
+    <!-- SCROLLS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+    <style>
+        html                    { overflow-y:scroll; }
+        body                    { padding-top:50px; }
+    </style>
+
+    <!-- SPELLS -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+    <script src="core.js"></script>
+
+</head>
+<!-- SET THE CONTROLLER -->
+<body ng-controller="mainController">
+    <div class="container">
+
+        <div class="jumbotron text-center">
+            <h5>Add a car to sell. Number of cars available for sale : <span class="label label-info">{{ cars.length }}</span></h5>
+        </div>
+
+        <!-- FORM TO ADD A CAR-->
+        <div id="cars-form" class="row">
+            <div >
+                <form>
+                    <div ng-controller="carController">
+                        <div class="block">
+                            <label>Make</label>
+                            <select required ng-change="getmodels(formData.Make)" ng-model="formData.Make">
+                                <option ng-repeat="make in makes" value="{{make.niceName}}">{{make.name}}</option>
+                            </select>
+                        </div>
+
+
+                        <div class="block">
+                            <label>Model</label>
+                            <select required ng-model="formData.Model">
+                                <option ng-repeat="model in models" value="{{model.name}}">{{model.name}}</option>
+                            </select>
+                        </div>
+
+
+                        <div class="block">
+                            <label>Year</label>
+                            <input type="number" min="1960"  ng-required=true ng-model="formData.Year" placeholder="2015" size="4" style="width:8ch"/>
+                        </div>
+
+                        <div class="block">
+                            <label>Mileage</label>
+                            <input type="number"  min="0" ng-required=true  ng-model="formData.Mileage" placeholder="50000" style="width:8ch"/>
+                        </div>
+
+
+                        <div class="block">
+                            <label>Price</label>
+                            <input type="number" min = "0"  align="right" ng-required=true  ng-model="formData.Price" placeholder="10000" style="width:10ch"/>
+                        </div>
+
+                        <div class="block">
+                            <label>Zip Code</label>
+                            <input type="number" min="10000" ng-required=true ng-model="formData.Zipcode" placeholder="95054" style="width:8ch"/>
+                        </div>
+
+                        <div class="block">
+                            <label>Email</label>
+                            <input type="email" ng-required=true ng-model="formData.Email" placeholder="abc@gmail.com" style="width:30ch"/>
+                        </div>
+
+                        <div class="block">
+                            <label>Phone Number</label>
+                            <input type="text" ng-model="formData.PhoneNumber" size="15"/>
+                        </div>
+
+                        <div class="block">
+                            <label>Notes</label>
+                            <textarea title="Notes" style="width:40ch;height:20ch" rows=5 cols=50 ng-model="formData.Notes" placeholder="Describe the vehicle"></textarea>
+                        </div>
+
+
+                        <div class="block">
+                            <button type="submit" class="btn btn-primary btn-lg" ng-click="createCar()">Add</button>
+                         </div>
+                        <p></p>
+                        <div class="block">
+                            <button class="btn btn-primary btn-lg"onclick="window.location.href='/'">Cancel</button>
+                        </div>
+                        <!-- BIND THIS VALUE TO formData.text IN ANGULAR
+                        <input type="text" class="form-control input-lg text-center" placeholder="Make of the car" ng-model="formData.Make">
+                        -->
+                    </div>
+
+                </form>
+        </div>
+        </div>
+    </div>
+
+</body>
+</html>

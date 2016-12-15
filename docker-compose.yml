@@ -1,0 +1,12 @@
+mongo:
+  image: mongo:latest
+  ports:
+   - "27017:27017"
+application:
+  build: .
+  ports:
+   - "8080:8080"
+  volumes :
+  - ./:/app
+  links:
+   - mongo

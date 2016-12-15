@@ -1,0 +1,102 @@
+<!-- author : siraj ghaffar -->
+
+<!DOCTYPE html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="hackathonCars">
+<head>
+    <!-- META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+    <title>Node/Angular Todo App</title>
+    <link rel="stylesheet" href="car.css">
+
+    <!-- SCROLLS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/sandstone/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <style>
+        html                    { overflow-y:scroll; }
+        body                    { padding-top:50px; }
+    </style>
+
+    <!-- SPELLS -->
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+
+    <script src="core.js"></script>
+
+</head>
+<!-- SET THE CONTROLLER AND GET ALL CARS-->
+<body ng-controller="mainController">
+    <div class="container">
+
+        <!-- HEADER AND COUNT -->
+        <div class="text-center">
+            <h1>Number of cars available for sale : <span class="label label-info">{{ cars.length }}</span></h1>
+        </div>
+
+        <div id="car-list" class="row">
+            <div class="col-sm-4 col-sm-offset-4">
+
+
+            </div>
+        </div>
+
+        <input id="search-text-input" type="search" placeholder="Search car" ng-model="searchQuery" margin-top/>
+        <div id="button-holder">
+            <img src="magnifying_glass.png">
+        </div>
+        <div/>
+        <table at-table at-paginated at-list class="table table-striped table-bordered table-condensed table-hover topmargin">
+            <thead>
+            <tr>
+                <th>
+                    <a href="#" ng-click="orderByField='Make'; reverseSort = !reverseSort">Make
+                        <span ng-show="orderByField == 'Make'" class="fa fa-caret-down"><span ng-show="!reverseSort"></span><span ng-show="reverseSort">v</span></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="#" ng-click="orderByField='Model'; reverseSort = !reverseSort">Model
+                        <span ng-show="orderByField == 'Model'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="#" ng-click="orderByField='Year'; reverseSort = !reverseSort">Year
+                        <span ng-show="orderByField == 'Year'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="#" ng-click="orderByField='Price'; reverseSort = !reverseSort">Price
+                        <span ng-show="orderByField == 'Price'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="#" ng-click="orderByField='Mileage'; reverseSort = !reverseSort">Mileage
+                        <span ng-show="orderByField == 'Mileage'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="#" ng-click="orderByField='Zipcode'; reverseSort = !reverseSort">Zipcode
+                        <span ng-show="orderByField == 'Zipcode'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                    </a>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="car in cars | orderBy:orderByField:reverseSort | filter:searchQuery">
+                <td><a href="#detail">{{car.Make}}</a></td>
+                <td>{{car.Model}}</td>
+                <td>{{car.Year}}</td>
+                <td align="right">{{car.Price | currency}}</td>
+                <td align="right">{{car.Mileage}}</td>
+                <td>{{car.Zipcode}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
